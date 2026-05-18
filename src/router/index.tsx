@@ -1,14 +1,37 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { ProtectedRoute } from './ProtectedRoute'
 
 export const router = createBrowserRouter([
+  // Auth routes (public)
   {
-    path: '/',
-    lazy: () => import('@/layouts/RootLayout').then((m) => ({ Component: m.RootLayout })),
+    lazy: () => import('@/layouts/AuthLayout').then((m) => ({ Component: m.AuthLayout })),
     children: [
       {
-        index: true,
-        lazy: () => import('@/pages/DashboardPage').then((m) => ({ Component: m.DashboardPage })),
+        path: '/login',
+        lazy: () => import('@/pages/LoginPage').then((m) => ({ Component: m.LoginPage })),
       },
     ],
+  },
+
+  // Protected routes
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        lazy: () => import('@/layouts/RootLayout').then((m) => ({ Component: m.RootLayout })),
+        children: [
+          {
+            path: '/',
+            lazy: () => import('@/pages/DashboardPage').then((m) => ({ Component: m.DashboardPage })),
+          },
+        ],
+      },
+    ],
+  },
+
+  // Fallback
+  {
+    path: '*',
+    element: <Navigate to="/" replace />,
   },
 ])

@@ -10,4 +10,24 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://176.126.166.10:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        configure: (proxy) => {
+          proxy.on('proxyRes', (proxyRes) => {
+            const location = proxyRes.headers['location']
+            if (location) {
+              proxyRes.headers['location'] = location.replace(
+                'http://176.126.166.10:8000',
+                '/api',
+              )
+            }
+          })
+        },
+      },
+    },
+  },
 })

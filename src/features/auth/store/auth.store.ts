@@ -4,9 +4,10 @@ import type { User } from '../types/auth.types'
 
 type AuthState = {
   user: User | null
-  token: string | null
+  accessToken: string | null
+  refreshToken: string | null
   isAuthenticated: boolean
-  setAuth: (user: User, token: string) => void
+  setAuth: (user: User, accessToken: string, refreshToken: string) => void
   logout: () => void
 }
 
@@ -14,20 +15,28 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
-      token: null,
+      accessToken: null,
+      refreshToken: null,
       isAuthenticated: false,
-      setAuth: (user, token) => {
-        localStorage.setItem('auth_token', token)
-        set({ user, token, isAuthenticated: true })
+      setAuth: (user, accessToken, refreshToken) => {
+        localStorage.setItem('access_token', accessToken)
+        localStorage.setItem('refresh_token', refreshToken)
+        set({ user, accessToken, refreshToken, isAuthenticated: true })
       },
       logout: () => {
-        localStorage.removeItem('auth_token')
-        set({ user: null, token: null, isAuthenticated: false })
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
+        set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false })
       },
     }),
     {
       name: 'auth-storage',
-      partialize: (state) => ({ user: state.user, token: state.token, isAuthenticated: state.isAuthenticated }),
+      partialize: (state) => ({
+        user: state.user,
+        accessToken: state.accessToken,
+        refreshToken: state.refreshToken,
+        isAuthenticated: state.isAuthenticated,
+      }),
     },
   ),
 )

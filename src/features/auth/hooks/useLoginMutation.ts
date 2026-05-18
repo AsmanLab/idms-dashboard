@@ -9,8 +9,9 @@ export function useLoginMutation() {
 
   return useMutation({
     mutationFn: authService.login,
-    onSuccess: ({ user, token }) => {
-      setAuth(user, token)
+    onSuccess: ({ data }) => {
+      const { user_info, authentication_info } = data
+      setAuth(user_info, authentication_info.access_token, authentication_info.refresh_token)
       navigate('/', { replace: true })
     },
   })

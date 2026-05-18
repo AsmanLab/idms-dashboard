@@ -1,17 +1,26 @@
 export type User = {
-  id: string
-  name: string
-  email: string
+  user_id: number
+  username: string
+  profile_id: number
   role: string
-  avatarUrl?: string
 }
 
 export type LoginCredentials = {
-  email: string
+  username: string
   password: string
 }
 
-export type AuthResponse = {
-  user: User
-  token: string
+export type LoginResponse = {
+  status_code: number
+  message: string
+  data: {
+    user_info: User
+    authentication_info: {
+      token_type: string
+      access_token: string
+      refresh_token: string
+      access_token_expires_in: number
+      refresh_token_expires_in: number
+    }
+  }
 }

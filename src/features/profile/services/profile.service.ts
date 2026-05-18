@@ -97,7 +97,7 @@ export const profileService = {
       ? delay(mockProfile(username))
       : api.get<UserProfile>(`/users/${username}`).then((r) => r.data),
 
-  updateProfile: (identityId: string, patch: { name?: string; department?: string }) =>
+  updateProfile: (identityId: string, patch: { name?: string; department?: string }): Promise<UserProfile> =>
     USE_MOCK
       ? delay<UserProfile>({
           id: identityId,

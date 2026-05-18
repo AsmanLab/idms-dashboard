@@ -52,8 +52,64 @@
   --shadow-panel: 0 8px 32px rgba(0, 0, 0, 0.08);
   --shadow-dropdown: 0 10px 24px rgba(0, 0, 0, 0.10);
 
+  /* Sidebar — light cream theme */
+  --color-sidebar-bg: #E8E7E3;
+  --color-sidebar-text: #8C8580;
+  --color-sidebar-hover-bg: #E0DEDB;
+  --color-sidebar-accent: #9B7FD4;
+  --sidebar-width: 220px;
+
   /* Font */
   --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400% 0; }
+  100% { background-position:  400% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-border)    0%,
+    var(--color-bg-input)  40%,
+    var(--color-border)    60%,
+    var(--color-border)    100%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* Sidebar curved-tab nav */
+.nav-item {
+  position: relative;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.nav-active {
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-btn) 0 0 var(--radius-btn);
+}
+
+.nav-active::before,
+.nav-active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-sidebar-bg);
+  pointer-events: none;
+}
+
+.nav-active::before {
+  bottom: 100%;
+  border-bottom-right-radius: 16px;
+}
+
+.nav-active::after {
+  top: 100%;
+  border-top-right-radius: 16px;
 }
 
 * {

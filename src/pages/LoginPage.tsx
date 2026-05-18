@@ -16,7 +16,7 @@ export function LoginPage() {
             </svg>
           </div>
           <h1 className="text-[22px] font-bold text-[var(--color-text-primary)] tracking-tight">
-            Jewellery IDMS
+            IDMIS
           </h1>
           <p className="text-sm text-[var(--color-text-muted)]">
             Sign in to your account

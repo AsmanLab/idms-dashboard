@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { ProtectedRoute } from './ProtectedRoute'
 
 export const router = createBrowserRouter([
-  // Auth routes (public)
+  // Public
   {
     lazy: () => import('@/layouts/AuthLayout').then((m) => ({ Component: m.AuthLayout })),
     children: [
@@ -13,25 +13,22 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // Protected routes
+  // Protected
   {
     element: <ProtectedRoute />,
     children: [
       {
         lazy: () => import('@/layouts/RootLayout').then((m) => ({ Component: m.RootLayout })),
         children: [
+          { path: '/', element: <Navigate to="/users" replace /> },
           {
-            path: '/',
-            lazy: () => import('@/pages/DashboardPage').then((m) => ({ Component: m.DashboardPage })),
+            path: '/users',
+            lazy: () => import('@/pages/UsersPage').then((m) => ({ Component: m.UsersPage })),
           },
         ],
       },
     ],
   },
 
-  // Fallback
-  {
-    path: '*',
-    element: <Navigate to="/" replace />,
-  },
+  { path: '*', element: <Navigate to="/users" replace /> },
 ])

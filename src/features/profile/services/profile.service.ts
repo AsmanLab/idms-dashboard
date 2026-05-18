@@ -99,7 +99,15 @@ export const profileService = {
 
   updateProfile: (identityId: string, patch: { name?: string; department?: string }) =>
     USE_MOCK
-      ? delay({ id: identityId, username: 'user', employeeId: 'EMP-00000', title: 'Senior Software Engineer', department: 'Engineering', status: 'active' as const, ...patch })
+      ? delay<UserProfile>({
+          id: identityId,
+          username: 'user',
+          name: patch.name ?? 'User',
+          employeeId: 'EMP-00000',
+          title: 'Senior Software Engineer',
+          department: patch.department ?? 'Engineering',
+          status: 'active',
+        })
       : api.patch<UserProfile>(`/identities/${identityId}`, patch).then((r) => r.data),
 
   getCredential: (_identityId: string) =>

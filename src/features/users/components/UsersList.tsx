@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useUsersQuery } from '../hooks/useUsersQuery'
 import { UsersListSkeleton } from './UsersListSkeleton'
 import type { UserRecord } from '../types/users.types'
@@ -29,9 +30,17 @@ const avatarPalette = [
 function UserRow({ user, index }: { user: UserRecord; index: number }) {
   const badge = getRoleStyle(user.role)
   const avatarBg = avatarPalette[index % avatarPalette.length]
+  const navigate = useNavigate()
 
   return (
-    <div className="flex items-center gap-4 px-5 py-4 border-b border-[var(--color-border)] last:border-0 hover:bg-[var(--color-bg-input)] transition-colors">
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={() => navigate(`/users/${user.username}`)}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate(`/users/${user.username}`) }}
+      className="flex items-center gap-4 px-5 py-4 border-b border-[var(--color-border)] last:border-0 hover:bg-[var(--color-bg-input)] transition-colors cursor-pointer"
+      aria-label={`View profile for ${user.first_name} ${user.last_name}`}
+    >
       {user.avatar_url ? (
         <img
           src={user.avatar_url}

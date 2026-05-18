@@ -1,0 +1,69 @@
+@theme {
+  /* Surfaces */
+  --color-bg-canvas: #EEC5A8;
+  --color-bg-surface: #F8F7F4;
+  --color-bg-card: #FFFFFF;
+  --color-bg-input: #F5F4F1;
+
+  /* Borders */
+  --color-border: #EEEDE9;
+  --color-border-subtle: #F0EEE9;
+
+  /* Text */
+  --color-text-primary: #1C1917;
+  --color-text-secondary: #6B6560;
+  --color-text-muted: #A8A29E;
+  --color-text-inverse: #FFFFFF;
+
+  /* Stat cards */
+  --color-card-amber: #E9C97C;
+  --color-card-periwinkle: #9B9FD4;
+  --color-card-mauve: #BEA0D0;
+  --color-card-peach: #F2B8A2;
+  --color-card-rose: #F0A0BA;
+  --color-card-blush: #F2AABB;
+
+  /* Accents */
+  --color-accent-purple: #9B7FD4;
+  --color-accent-pink: #F472B6;
+  --color-accent-green: #86EFAC;
+  --color-accent-red: #FCA5A5;
+
+  /* Badges */
+  --color-badge-inventory-bg: #E0D9F8;
+  --color-badge-inventory-text: #6B4FCC;
+  --color-badge-order-bg: #FFE4CC;
+  --color-badge-order-text: #C2681A;
+  --color-badge-maintenance-bg: #FFD6E0;
+  --color-badge-maintenance-text: #C0394B;
+
+  /* Radius */
+  --radius-card: 20px;
+  --radius-stat: 16px;
+  --radius-badge: 9999px;
+  --radius-btn: 12px;
+  --radius-avatar: 9999px;
+  --radius-input: 10px;
+  --radius-icon-btn: 10px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-panel: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-dropdown: 0 10px 24px rgba(0, 0, 0, 0.10);
+
+  /* Font */
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg-canvas);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -29,6 +29,14 @@ export const router = createBrowserRouter([
             path: '/users/:username',
             lazy: () => import('@/pages/UserProfilePage').then((m) => ({ Component: m.UserProfilePage })),
           },
+          {
+            path: '/access',
+            lazy: () => import('@/pages/AccessPage').then((m) => ({ Component: m.AccessPage })),
+          },
+          {
+            path: '/access/:id',
+            lazy: () => import('@/pages/AccessRequestDetailPage').then((m) => ({ Component: m.AccessRequestDetailPage })),
+          },
         ],
       },
     ],
